@@ -1,0 +1,40 @@
+syntax = "proto3";
+package pt.ulisboa.tecnico.classes.contract.naming;
+
+import "ClassesDefinitions.proto";
+
+
+message RegisterRequest {
+    string serviceName = 1;
+    string hostAndPort = 2;
+    repeated string serverQualifiers = 3;
+}
+
+message RegisterResponse {
+    int32 serverId = 1;
+}
+
+message LookupRequest {
+    string serviceName = 1;
+    repeated string serverQualifiers = 2;
+}
+
+message LookupResponse {
+    repeated Server server = 1;
+}
+
+message DeleteRequest {
+    string serviceName = 1;
+    string hostAndPort = 2;
+}
+
+message DeleteResponse {
+    
+}
+
+
+service NamingServerService{
+    rpc register(RegisterRequest) returns (RegisterResponse);
+    rpc lookup(LookupRequest) returns (LookupResponse);
+    rpc delete(DeleteRequest) returns (DeleteResponse);
+}
